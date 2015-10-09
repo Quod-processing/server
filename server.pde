@@ -42,6 +42,7 @@ void draw()
       String lineCache[] = split(readClient[0], ":");
       println(readClient[0]);
       if (lineCache.length>2) {
+
         if (lineCache[0].equals("1")) {
           if ((Devicelogin.hasKey(lineCache[2])!=true)&&(Devices.hasValue(lineCache[1])!=true)) {
             myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"true");
@@ -66,13 +67,19 @@ void draw()
 }
 
 void worldCompute(int worldNum, String playerID, String playType) {
-  if (playType.equals("join")&&(worldValidI[worldNum]!=3)) {
+  if (playType.equals("join")&&(worldValidI[worldNum]==1)) {
     if ((worldValidS[2*worldNum-1]==null||(worldValidS[2*worldNum-1]!=null&&!worldValidS[2*worldNum-1].equals(playerID))) && (worldValidS[2*worldNum]==null||(worldValidS[2*worldNum]!=null&&!worldValidS[2*worldNum].equals(playerID))) ) { //check if they were exist
       worldValidI[worldNum]++;
       println("hi");
       if (worldValidS[2*worldNum-1]==null) worldValidS[2*worldNum-1]=playerID;
       else worldValidS[2*worldNum]=playerID;
     }
+  } else if (playType.equals("join")&&(worldValidI[worldNum]==2)) {
+    worldValidI[worldNum]++;
+    println("hi");
+    if (worldValidS[2*worldNum-1]==null) worldValidS[2*worldNum-1]=playerID;
+    else worldValidS[2*worldNum]=playerID;
+    myServer.write("w"+":"+"start"+":"+worldValidS[2*worldNum-1]+":"+worldValidS[2*worldNum]+"::");
   }
   if (worldValidI[worldNum]==3) {
     if (playType.equals("blok")) {
