@@ -1,4 +1,4 @@
-//server
+//v0.4.0
 
 import processing.net.*;
 
@@ -45,20 +45,27 @@ void draw()
 
         if (lineCache[0].equals("1")) {
           if ((Devicelogin.hasKey(lineCache[2])!=true)&&(Devices.hasValue(lineCache[1])!=true)) {
-            myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"true");
+            myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
           } else myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
         } else if (lineCache[0].equals("2")) {
 
           if ((loginIDPD.hasKey(lineCache[2]))&&loginIDPD.get(lineCache[2]).equals(lineCache[3])) {
             println(lineCache[2]+"loginsuccess!!!!");
-            myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"true");
+            myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
             Devicelogin.set(lineCache[1], lineCache[2]);
           } else myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
         }
         if (lineCache[0].equals("w")) {
           if (lineCache[1]!=null) {
             println("letmein?");
-            worldCompute(parseInt(lineCache[1]), lineCache[2], lineCache[3]);
+            if(lineCache[1].equals("1")||lineCache[1].equals("2")) {
+              worldCompute(parseInt(lineCache[1]), lineCache[2], lineCache[3]);
+              
+            }
+            if (lineCache[1].equals("play")) {
+              //w+play+worldID+playerID+action+xcoordinate+ycoordinate
+              myServer.write("w"+":"+"play"+":"+lineCache[2]+":"+lineCache[3]+":"+lineCache[4]+":"+lineCache[5]+":"+lineCache[6]+"::");
+            }
           }
         }
       }
@@ -79,7 +86,7 @@ void worldCompute(int worldNum, String playerID, String playType) {
     println("hi");
     if (worldValidS[2*worldNum-1]==null) worldValidS[2*worldNum-1]=playerID;
     else worldValidS[2*worldNum]=playerID;
-    myServer.write("w"+":"+"start"+":"+worldValidS[2*worldNum-1]+":"+worldValidS[2*worldNum]+"::");
+    myServer.write("w"+":"+"start"+":"+worldNum+":"+worldValidS[2*worldNum-1]+":"+worldValidS[2*worldNum]+"::");
   }
   if (worldValidI[worldNum]==3) {
     if (playType.equals("blok")) {
