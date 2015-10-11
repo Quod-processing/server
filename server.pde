@@ -58,7 +58,7 @@ void draw()
         if (lineCache[0].equals("w")) {
           if (lineCache[1]!=null) {
             println("letmein?");
-            if(lineCache[1].equals("1")||lineCache[1].equals("2")) {
+            if(lineCache[1].equals("1")||lineCache[1].equals("2")||lineCache[1].equals("3")||lineCache[1].equals("4")||lineCache[1].equals("5")||lineCache[1].equals("6")) {
               worldCompute(parseInt(lineCache[1]), lineCache[2], lineCache[3]);
               
             }
