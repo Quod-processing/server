@@ -1,4 +1,4 @@
-//v0.4.1
+//v0.5.0
 
 import processing.net.*;
 
@@ -38,8 +38,8 @@ void draw()
 
   if (thisClient !=null) {
     String readClient[] = split(thisClient.readString(), "::");
-    if (readClient != null) {
-      String lineCache[] = split(readClient[0], ":");
+    for (int i=0; i<readClient.length; i++) {
+      String lineCache[] = split(readClient[i], ":");
       println(readClient[0]);
       if (lineCache.length>2) {
 
@@ -58,9 +58,8 @@ void draw()
         if (lineCache[0].equals("w")) {
           if (lineCache[1]!=null) {
             println("letmein?");
-            if(lineCache[1].equals("1")||lineCache[1].equals("2")||lineCache[1].equals("3")||lineCache[1].equals("4")||lineCache[1].equals("5")||lineCache[1].equals("6")) {
+            if (lineCache[1].equals("1")||lineCache[1].equals("2")||lineCache[1].equals("3")||lineCache[1].equals("4")||lineCache[1].equals("5")||lineCache[1].equals("6")) {
               worldCompute(parseInt(lineCache[1]), lineCache[2], lineCache[3]);
-              
             }
             if (lineCache[1].equals("play")) {
               //w+play+worldID+playerID+action+xcoordinate+ycoordinate
