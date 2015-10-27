@@ -1,11 +1,12 @@
-//v0.5.0
+//v0.5.1
 
 import processing.net.*;
 
 int port = 11084;
 int readableCache=1;
 Server myServer;        
-BufferedReader reader;
+BufferedReader playerIDPDreader;
+PrintWriter playerIDPDwriter;
 int worldValid = 111111;
 int[] worldValidI = new int[7];
 String[] worldValidS = new String[13];
@@ -17,13 +18,16 @@ void setup()
   size(100, 100);
   background(0);
   myServer = new Server(this, port);
-  reader = createReader("db.txt");
-  Devicelogin = new StringDict();
+  playerIDPDreader = createReader("db.txt");
+    Devicelogin = new StringDict();
   loginIDPD = new StringDict();
   DeviceWorld = new StringDict();
   Devices = new StringList();
   readText();
   indexText();
+  playerIDPDwriter = createWriter("db.txt");
+
+
   for (int i=1; i<7; i++) worldValidI[i]=1;
 }
 

@@ -3,7 +3,7 @@ void readText(){
   while(readableCache==1){
     
     try {
-    line[i] = reader.readLine();
+    line[i] = playerIDPDreader.readLine();
   } catch (IOException e) {
     e.printStackTrace();
     line[i] = null;
