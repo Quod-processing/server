@@ -1,4 +1,4 @@
-//v0.5.1
+//v0.6.0b1
 
 import processing.net.*;
 
@@ -18,14 +18,14 @@ void setup()
   size(100, 100);
   background(0);
   myServer = new Server(this, port);
-  playerIDPDreader = createReader("db.txt");
-    Devicelogin = new StringDict();
+  playerIDPDreader = createReader("IDPD.txt");
+  Devicelogin = new StringDict();
   loginIDPD = new StringDict();
   DeviceWorld = new StringDict();
   Devices = new StringList();
   readText();
   indexText();
-  playerIDPDwriter = createWriter("db.txt");
+  playerIDPDwriter = createWriter("IDPD.txt");
 
 
   for (int i=1; i<7; i++) worldValidI[i]=1;
