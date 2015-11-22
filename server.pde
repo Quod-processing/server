@@ -1,6 +1,20 @@
 //v0.6.0b1
-
+//server
 import processing.net.*;
+//mail
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 int port = 11084;
 int readableCache=1;
@@ -47,18 +61,35 @@ void draw()
       println(readClient[0]);
       if (lineCache.length>2) {
 
+        //login
         if (lineCache[0].equals("1")) {
           if ((Devicelogin.hasKey(lineCache[2])!=true)&&(Devices.hasValue(lineCache[1])!=true)) {
             myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
           } else myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
         } else if (lineCache[0].equals("2")) {
-
           if ((loginIDPD.hasKey(lineCache[2]))&&loginIDPD.get(lineCache[2]).equals(lineCache[3])) {
-            println(lineCache[2]+"loginsuccess!!!!");
+            println(lineCache[2]+" login success!!!!");
             myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
             Devicelogin.set(lineCache[1], lineCache[2]);
           } else myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
         }
+        
+        //signup
+        if (lineCache[0].equals("3")) {
+          if ((Devicelogin.hasKey(lineCache[2])!=true)&&(Devices.hasValue(lineCache[1])!=true)) {
+            myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
+          } else myServer.write("1"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
+        } else if (lineCache[0].equals("4")) {
+          if (loginIDPD.hasKey(lineCache[2])==false) {
+            println(lineCache[2]+" signup success!!!!");
+            myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"true"+"::");
+            Devicelogin.set(lineCache[1], lineCache[2]);
+            loginIDPD.set(lineCache[2], lineCache[4]);//lineCache[3] is email.
+            send(lineCache[2], lineCache[3], "qwerty");
+          } else myServer.write("2"+":"+lineCache[1]+":"+lineCache[2]+":"+"false"+"::");
+        }
+        
+        //world
         if (lineCache[0].equals("w")) {
           if (lineCache[1]!=null) {
             println("letmein?");

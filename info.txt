@@ -1,9 +1,45 @@
-“send info type” : “send for whom to receive” : “main data” : “hash” ::
+“send data type” : “main data” : “hash” ::
+hashkey
+
+
+(한국어, ko)
+
+‘:’ 는 주 데이터 사이의 구분, ‘::’ 은 통신 사이의 구분, ‘/‘는 데이터 내부에서의 세부 구분을 위하여 사용된다.
+send data type 은 전송되는 데이터의 종류를 뜻함.
+main data 는 전송해야 하는 데이터
+hash 는 send data type + main data의 md5 hash 값의 앞 6글자로 전송되는 데이터의 무결성을 확인하는데 쓰인다.
+
+기본적인 통신 과정
+송신: “send data type” : “main data” : “hash” :: 를 전송한다.(한 프레임에 동시에 전송하지 않는다.)
+수신 : 
+1.“::”으로 데이터를 쪼갠다.
+2.”:”으로 데이터를 쪼갠다.
+3.데이터의 수가 3개가 아니면 무시.
+4.“send data type” + “main data” + “hashkey” string 의 해시값이 hash와 일치하는지 확인한다.
+
+data type
+[1] 1
+설명 : 서버에서 제공하는 ‘방’들의 접속자수에 대한 정보를 담고 있다.
+데이터 구조 : 1/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 server -> client
 [1] send world info
 send info type : 1
-send for whom to receive : 0 (for all)
 main data : 111111 (room 1 to 6, 1 : empty, 2 : 1, 3: full)
 
 [2]
