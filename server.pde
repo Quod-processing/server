@@ -1,4 +1,4 @@
-//v0.6.0b1
+//v0.6.0b2
 //server
 import processing.net.*;
 //mail

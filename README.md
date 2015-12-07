@@ -7,4 +7,4 @@ Server-repository for Quod
 - Based on : **Processing 3.0.1** https://processing.org/download/
 - for more information, visit http://mileu.ml
 - reference : quod.ml
-- version info : v0.6.0b1BUILD8
+- version info : v0.6.0b1BUILD10
